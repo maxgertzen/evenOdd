@@ -11,9 +11,7 @@ function EvenOdd(round) {
     let numberOfPlayers = null;
     let winner = null;
 
-    const __randomizer = function (min = -5, max = 13) {
-        return Math.floor((Math.random() * (max - min) + min));
-    }
+
 
     // let num = __randomizer();
     // if (num % 2 === 0) {
