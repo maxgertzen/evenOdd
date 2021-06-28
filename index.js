@@ -60,7 +60,7 @@ function EvenOddGame() {
         } else if (players[randomPlayer2].score > highScore) {
             highScore = players[randomPlayer2].score;
         }
-        console.log(`*******\n${players[0].name} - ${players[0].score}\n${players[1].name} - ${players[1].score}\n*******\n`)
+        console.log(`*******\n${currentPlayers.player1.name} - ${currentPlayers.player1.score}\n${currentPlayers.player2.name} - ${currentPlayers.player2.score}\n*******\n`)
         round++;
     }
 }
