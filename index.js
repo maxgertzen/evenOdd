@@ -5,15 +5,26 @@ const randomizer = (min = -5, max = 13) => {
 }
 
 function EvenOddGame() {
-    const players = [
-        {
-            name: readline.question('1st Player Name: \n'),
-            score: 0
-        },
-        {
-            name: readline.question('2nd Player Name: \n'),
-            score: 0
-        }]
+    const players = []
+
+
+    const setPlayers = (numPlayers) => {
+        const newPlayers = []
+        for (let i = 0; i < numPlayers; i++) {
+            const player = {
+                name: readline.question(`Player ${i + 1} Name: \n`),
+                score: 0
+            }
+            newPlayers.push(player)
+        }
+        return newPlayers
+    }
+
+    let numOfPlayers = readline.question('How many players: \n');
+    while (Number.isNaN(numOfPlayers) || numOfPlayers < 2 || numOfPlayers > 7) {
+        numOfPlayers = + readline.question('Can be only 2 to 7 players. Please enter number of players again')
+    };
+    setPlayers(numOfPlayers);
 
     const rounds = readline.question('How many rounds?\n');
     const scoreToWin = Math.floor(rounds / 2) + 1;
@@ -27,12 +38,29 @@ function EvenOddGame() {
     }
 
     let round = 1;
-    while (players[0].score < scoreToWin && players[1].score < scoreToWin) {
+    let highScore = 0;
+
+    while (highScore < scoreToWin) {
+        let randomPlayer1 = randomizer(0, players.length);
+        let randomPlayer2 = randomizer(0, players.length);
+
+        if (randomPlayer1 === randomPlayer2) continue;
+
+        const currentPlayers = [
+            players[randomPlayer1],
+            players[randomPlayer2]
+        ]
+
         let rand = randomizer();
         if (rand % 2 === 0) {
-            addScore(players[0], rand)
+            addScore(currentPlayers[0], rand)
         } else {
-            addScore(players[1], rand)
+            addScore(currentPlayers[1], rand)
+        }
+        if (players[randomPlayer1].score > highScore) {
+            highScore = players[randomPlayer1].score;
+        } else if (players[randomPlayer2].score > highScore) {
+            highScore = players[randomPlayer2].score;
         }
         console.log(`*******\n${players[0].name} - ${players[0].score}\n${players[1].name} - ${players[1].score}\n*******\n`)
         round++;
