@@ -22,7 +22,7 @@ function EvenOddGame() {
         user.score++;
         console.log(`${user.name} is winner of round ${round}, after drawing ${randomNumber} random number.\n1 score added.`)
         if (user.score === scoreToWin) {
-            console.log(`${user.name} won the game`)
+            console.log(`${user.name} won the game with score of ${user.score}`)
         }
     }
 
@@ -34,6 +34,7 @@ function EvenOddGame() {
         } else {
             addScore(players[1], rand)
         }
+        console.log(`*******\n${players[0].name} - ${players[0].score}\n${players[1].name} - ${players[1].score}\n*******\n`)
         round++;
     }
 }
