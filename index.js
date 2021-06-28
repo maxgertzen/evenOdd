@@ -5,8 +5,6 @@ const randomizer = (min = -5, max = 13) => {
 }
 
 function EvenOddGame() {
-    const players = []
-
 
     const setPlayers = (numPlayers) => {
         const newPlayers = []
@@ -24,7 +22,7 @@ function EvenOddGame() {
     while (Number.isNaN(numOfPlayers) || numOfPlayers < 2 || numOfPlayers > 7) {
         numOfPlayers = + readline.question('Can be only 2 to 7 players. Please enter number of players again')
     };
-    setPlayers(numOfPlayers);
+    players = setPlayers(numOfPlayers);
 
     const rounds = readline.question('How many rounds?\n');
     const scoreToWin = Math.floor(rounds / 2) + 1;
@@ -46,16 +44,16 @@ function EvenOddGame() {
 
         if (randomPlayer1 === randomPlayer2) continue;
 
-        const currentPlayers = [
-            players[randomPlayer1],
-            players[randomPlayer2]
-        ]
+        const currentPlayers = {
+            player1: players[randomPlayer1],
+            player2: players[randomPlayer2]
+        }
 
         let rand = randomizer();
         if (rand % 2 === 0) {
-            addScore(currentPlayers[0], rand)
+            addScore(currentPlayers.player1, rand)
         } else {
-            addScore(currentPlayers[1], rand)
+            addScore(currentPlayers.player2, rand)
         }
         if (players[randomPlayer1].score > highScore) {
             highScore = players[randomPlayer1].score;
